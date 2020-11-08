@@ -7005,35 +7005,7 @@ static void bxe_release_alr(struct bxe_softc *sc)
 static void
 bxe_fan_failure(struct bxe_softc *sc)
 {
-    //int port = SC_PORT(sc);
-    //uint32_t ext_phy_config;
-
-    ///* mark the failure */
-    //ext_phy_config =
-    //    SHMEM_RD(sc, dev_info.port_hw_config[port].external_phy_config);
-
-    //ext_phy_config &= ~PORT_HW_CFG_XGXS_EXT_PHY_TYPE_MASK;
-    //ext_phy_config |= PORT_HW_CFG_XGXS_EXT_PHY_TYPE_FAILURE;
-    //SHMEM_WR(sc, dev_info.port_hw_config[port].external_phy_config,
-    //         ext_phy_config);
-
-    ///* log the failure */
-    //BLOGW(sc, "Fan Failure has caused the driver to shutdown "
-    //          "the card to prevent permanent damage. "
-    //          "Please contact OEM Support for assistance\n");
-
-    /* XXX */
-#if 1
-    bxe_panic(sc, ("Schedule task to handle fan failure\n"));
-#else
-    /*
-     * Schedule device reset (unload)
-     * This is due to some boards consuming sufficient power when driver is
-     * up to overheat if fan fails.
-     */
-    bxe_set_bit(BXE_SP_RTNL_FAN_FAILURE, &sc->sp_rtnl_state);
-    schedule_delayed_work(&sc->sp_rtnl_task, 0);
-#endif
+    
 }
 
 /* this function is called upon a link interrupt */
